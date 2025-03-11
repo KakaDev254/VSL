@@ -1,0 +1,165 @@
+{% extends 'main.html' %} {% load static %} {% block title %} Home-VSL
+{%endblock %} {% block content %}
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">VSL</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bx bx-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bx bx-table"></i> Tables</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="bx bx-calendar"></i> Fixtures</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="teamsDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              <i class="bx bx-football"></i> Teams
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Kabete Legends</a></li>
+              <li><a class="dropdown-item" href="#">Ndovu FC</a></li>
+              <li><a class="dropdown-item" href="#">GAS Legends</a></li>
+              <li><a class="dropdown-item" href="#">TMK Wazee</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bx bx-news"></i> News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="bx bx-check-circle"></i> Results</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+
+  <div class="container">
+    <div class="row">
+      <!-- Standings Table (Left) -->
+      <div class="col-lg-3 col-md-12">
+        <h4 class="text-center text-dark">Standings</h4>
+        <table class="table table-striped text-center">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Team</th>
+              <th>MP</th>
+              <th>GF</th>
+              <th>GA</th>
+              <th>GD</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for team in standings %}
+            <tr>
+              <td>{{ team.pos }}</td>
+              <td>{{ team.name }}</td>
+              <td>{{ team.played }}</td>
+              <td>{{ team.goals_for }}</td>
+              <!-- Added GF -->
+              <td>{{ team.goals_against }}</td>
+              <!-- Added GA -->
+              <td>{{ team.goal_difference }}</td>
+              <td>{{ team.points }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7">No standings available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- News Section (Middle) -->
+      <div class="col-lg-6 col-md-12">
+        <h4 class="text-center text-dark">Latest News</h4>
+        <div class="card news-card mb-3">
+          <img src="assets/kabete.jpg" class="card-img-top" alt="News" />
+          <div class="card-body news-card-body">
+            <h5 class="card-title">
+              Kabate Legends to face newly promoted Kijabe Hosp
+            </h5>
+            <p class="card-text">
+              Don't miss the thrilling encounter between Kabete Legends and
+              Kijabe Hospital this weekend!
+            </p>
+          </div>
+        </div>
+        <div class="card news-card">
+          <img src="assets/fixture.jpg" class="card-img-top" alt="News" />
+          <div class="card-body news-card-body">
+            <h5 class="card-title">
+              "GAS Legends and Rooftop Ready to Ignite the Field in Upcoming
+              Clash"
+            </h5>
+            <p class="card-text">
+              Spotlight? One thing’s for sure—this match is bound to keep
+              spectators on the edge of their seats!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fixtures (Right) -->
+      <div class="col-lg-3 col-md-12">
+        <h4 class="text-center text-dark">Upcoming Fixtures</h4>
+        <ul class="list-group">
+          {% for fixture in fixtures %}
+          <li class="list-group-item fixture-item">
+            {{ fixture.home_team.name }} vs {{ fixture.away_team.name }} - {{
+            fixture.match_date|date:"D, d M Y" }}
+          </li>
+          {% empty %}
+          <li class="list-group-item text-center">No upcoming fixtures</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Recent Results -->
+      <div class="col-lg-3 col-md-12">
+        <h4 class="text-center text-dark">Recent Results</h4>
+        <ul class="list-group">
+          {% for match in recent_matches %}
+          <li class="list-group-item list-group-item-info">
+            {{ match.home_team.name }} {{ match.home_score }} - {{
+            match.away_score }} {{ match.away_team.name }} ({{
+            match.match_date|date:"D g:i A" }})
+          </li>
+          {% empty %}
+          <li class="list-group-item">No results available.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock content %}

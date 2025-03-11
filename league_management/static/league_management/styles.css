@@ -1,0 +1,111 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding-top: 70px; /* Offset for fixed navbar */
+}
+
+/* Navbar */
+.navbar {
+  background-color: #4a006d !important; /* Red */
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white !important;
+}
+.navbar-nav .nav-link {
+  color: white !important;
+  font-weight: bold;
+}
+.navbar-nav .nav-link i {
+  margin-right: 5px;
+}
+.navbar-nav .nav-link:hover {
+  color: #ece852 !important; /* Light Yellow */
+}
+.dropdown-menu {
+  background-color: #f4f6ff !important; /* Yellow-Orange */
+}
+.dropdown-menu .dropdown-item {
+  color: black;
+  font-weight: bold;
+}
+.dropdown-menu .dropdown-item:hover {
+  background-color: #ff4545 !important; /* Green */
+  color: white;
+}
+
+/* Standings Table */
+.table {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.table th {
+  background-color: #ff3131 !important; /* Yellow-Orange */
+  color: white;
+  text-transform: uppercase;
+}
+.table tbody tr:hover {
+  background-color: #5cb338 !important; /* Green */
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+
+/* News Section */
+.news-card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.news-card img {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.news-card-body {
+  background-color: #0d6924 !important; /* Light Yellow */
+  color: black;
+  padding: 15px;
+}
+.news-card-body h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.news-card-body p {
+  font-size: 0.95rem;
+}
+
+/* Fixtures List */
+.list-group .fixture-item {
+  background-color: #ffff00 !important; /* Yellow-Orange */
+  color: black !important;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background 0.3s ease-in-out;
+}
+.list-group .fixture-item:hover {
+  background-color: #5cb338 !important; /* Green */
+  color: white !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .container {
+    margin-top: 30px;
+  }
+  .news-card img {
+    height: 180px;
+  }
+  .news-card-body {
+    padding: 10px;
+  }
+  .list-group .fixture-item {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
