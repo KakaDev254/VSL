@@ -18,6 +18,25 @@
     display: block; /* Ensure proper spacing */
     margin: auto; /* Center the logos */
   }
+  @media (max-width: 768px) {
+    .col-6 {
+      flex: 1 1 30%; /* Three logos per row */
+    }
+
+    .img-fluid {
+      max-width: 60px; /* Reduce logo size for smaller screens */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .col-6 {
+      flex: 1 1 45%; /* Two logos per row on very small screens */
+    }
+
+    .img-fluid {
+      max-width: 50px; /* Further reduce size */
+    }
+  }
 </style>
 <footer>
   <div class="bg-dark text-light py-4 mt-5">
