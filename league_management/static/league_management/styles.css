@@ -274,7 +274,89 @@ body {
 }
 /* main table styling */
 .main_table-container {
-  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+h5 {
+  background-color: #410445; /* Dark Purple */
+  color: #f6dc43; /* Yellow */
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th {
+  background-color: #a5158c; /* Pink */
+  color: white;
+  text-transform: uppercase;
+}
+
+.table td {
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fdf4ff; /* Light Pink */
+}
+
+.table-bordered {
+  border: 2px solid #a5158c;
+}
+
+/* Club and Player Names */
+.club-name,
+.player-name {
+  font-weight: bold;
+  color: #410445; /* Dark Purple */
+}
+
+/* Responsive Styling */
+@media (max-width: 991px) {
+  /* Stack tables on smaller screens */
+  .col-lg-9,
+  .col-lg-3 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  h5 {
+    font-size: 16px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table th,
+  .table td {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  h5 {
+    font-size: 14px;
+    padding: 6px;
+  }
 }
 .table thead {
   background-color: #660066;
