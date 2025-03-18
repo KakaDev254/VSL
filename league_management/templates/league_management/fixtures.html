@@ -1,0 +1,131 @@
+{% extends 'main.html' %}{%load static%} {% block content %}
+<style>
+  /* Container Styling */
+  .container {
+    max-width: 900px;
+    margin: auto;
+  }
+
+  /* Match Fixture Styling */
+  .fixture-list {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .fixture-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  /* Team Logo */
+  .team-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  /* Team Name */
+  .team-name {
+    font-weight: bold;
+    color: #3c1053;
+    margin-top: 5px;
+    font-size: 1rem;
+  }
+
+  /* Match Time Badge */
+  .time-badge {
+    background: #6a0dad;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  /* Stadium Info */
+  .stadium-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .stadium-info i {
+    color: #6a0dad;
+    margin-right: 5px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .fixture-item {
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .col-4,
+    .col-2 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .time-badge {
+      display: inline-block;
+    }
+  }
+</style>
+<div class="container mt-4">
+  <h2 class="text-center text-uppercase fw-bold">Match Fixtures</h2>
+
+  {% if fixture_groups %} {% for match_day, matches in fixture_groups.items %}
+  <h3 class="mt-4 text-primary">{{ match_day }}</h3>
+  <div class="fixture-list">
+    {% for fixture in matches %}
+    <div class="fixture-item row align-items-center p-3 border-bottom">
+      <!-- Home Team (Logo & Name in One Line) -->
+      <div class="col-4 d-flex align-items-center justify-content-start gap-2">
+        <img
+          src="{% if fixture.home_team.logo %}{{ fixture.home_team.logo.url }}{% else %}/static/images/default-logo.png{% endif %}"
+          alt="{{ fixture.home_team.name }}"
+          class="team-logo"
+          style="width: 40px; height: 40px"
+        />
+        <span class="team-name fw-bold">{{ fixture.home_team.name }}</span>
+      </div>
+
+      <!-- Match Time -->
+      <div class="col-2 text-center">
+        <span class="time-badge px-3 py-2 rounded"
+          >{{ fixture.match_time|default:"TBD" }}</span
+        >
+      </div>
+
+      <!-- Away Team (Logo & Name in One Line) -->
+      <div class="col-4 d-flex align-items-center justify-content-start gap-2">
+        <img
+          src="{% if fixture.away_team.logo %}{{ fixture.away_team.logo.url }}{% else %}/static/images/default-logo.png{% endif %}"
+          alt="{{ fixture.away_team.name }}"
+          class="team-logo"
+          style="width: 40px; height: 40px"
+        />
+        <span class="team-name fw-bold">{{ fixture.away_team.name }}</span>
+      </div>
+
+      <!-- Stadium -->
+      <div class="col-2 text-center stadium-info">
+        <i class="fas fa-location-dot"></i>
+        <span class="stadium-name">Stima Club </span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %} {% else %}
+  <p class="text-center text-muted">No upcoming fixtures.</p>
+  {% endif %}
+</div>
+
+{% endblock content %}

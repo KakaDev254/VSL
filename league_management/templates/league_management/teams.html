@@ -1,0 +1,22 @@
+{% extends 'main.html' %} {% load static %} {% block title %} VSL-Teams
+{%endblock %} {% block content %}
+<div class="container mt-5">
+  <h2 class="text-center fw-bold text-primary">Teams</h2>
+  <div class="row g-4 mt-4">
+    {% for team in teams %}
+    <div class="col-md-4 col-lg-2">
+      {# 6 teams per row (12 / 2 = 6 columns) #}
+      <div class="team-card shadow-sm p-3">
+        {% if team.logo %}
+        <img src="{{ team.logo.url }}" alt="{{ team.name }}" />
+        {% else %}
+        <img src="{% static 'default-logo.png' %}" alt="No Logo Available" />
+        {% endif %}
+        <h5 class="mt-2 fw-bold">{{ team.name }}</h5>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

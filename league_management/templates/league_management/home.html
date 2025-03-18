@@ -1,70 +1,124 @@
-{% extends 'main.html' %} {% load static %} {% block title %} Home-VSL
-{%endblock %} {% block content %}
-
+{% extends 'main.html' %} {% load static %} {% block content %}
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">VSL</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bx bx-home"></i> Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bx bx-table"></i> Tables</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"
-              ><i class="bx bx-calendar"></i> Fixtures</a
-            >
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="teamsDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-            >
-              <i class="bx bx-football"></i> Teams
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Kabete Legends</a></li>
-              <li><a class="dropdown-item" href="#">Ndovu FC</a></li>
-              <li><a class="dropdown-item" href="#">GAS Legends</a></li>
-              <li><a class="dropdown-item" href="#">TMK Wazee</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bx bx-news"></i> News</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"
-              ><i class="bx bx-check-circle"></i> Results</a
-            >
-          </li>
-        </ul>
+  <!-- Main Content -->
+  <div class="top_fixtures-container">
+    {% if upcoming_fixtures %} {% for fixture in upcoming_fixtures %}
+    <div class="fixture-card">
+      <div class="top_team">
+        {% if fixture.home_team.logo %}
+        <img
+          src="{{ fixture.home_team.logo.url }}"
+          alt="{{ fixture.home_team.name }}"
+          class="top_team-logo"
+        />
+        {% else %}
+        <img
+          src="{% static 'images/default-logo.png' %}"
+          alt="No logo"
+          class="top_team-logo"
+        />
+        {% endif %}
+      </div>
+
+      <div class="vs">VS</div>
+
+      <div class="top_team">
+        {% if fixture.away_team.logo %}
+        <img
+          src="{{ fixture.away_team.logo.url }}"
+          alt="{{ fixture.away_team.name }}"
+          class="top_team-logo"
+        />
+        {% else %}
+        <img
+          src="{% static 'images/default-logo.png' %}"
+          alt="No logo"
+          class="top_team-logo"
+        />
+        {% endif %}
       </div>
     </div>
-  </nav>
+    {% endfor %} {% else %}
+    <div class="fixture-card">
+      <span class="no-fixture">No upcoming fixtures</span>
+    </div>
+    {% endif %}
+  </div>
 
-  <!-- Main Content -->
+  <div class="container mt-4">
+    <div class="row">
+      <!-- Main News Section -->
+      {% if main_news %}
+      <div class="col-lg-7">
+        <div class="card main-news">
+          {% if main_news.image %}
+          <img
+            src="{{ main_news.image.url }}"
+            class="card-img-top main-news-img"
+            alt="{{ main_news.title }}"
+          />
+          {% endif %}
+          <div class="card-body">
+            <p class="text-muted small">
+              📅 {{ main_news.created_at|date:"F d, Y" }}
+            </p>
+            <h3 class="card-title">{{ main_news.title }}</h3>
+            <p class="card-text">{{ main_news.content|truncatewords:25 }}</p>
+            <a
+              href="{% url 'news_detail' main_news.id %}"
+              class="btn btn-primary"
+              >Read More</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Side News Section -->
+      <div class="col-lg-5">
+        <div class="side-news">
+          {% for news in side_news %}
+          <div class="card mb-3 side-news-card">
+            <div class="row g-0">
+              <div class="col-md-4">
+                {% if news.image %}
+                <img
+                  src="{{ news.image.url }}"
+                  class="img-fluid side-news-img"
+                  alt="{{ news.title }}"
+                />
+                {% endif %}
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <p class="text-muted small">
+                    📅 {{ news.created_at|date:"F d, Y" }}
+                  </p>
+                  <h5 class="card-title">{{ news.title }}</h5>
+                  <p class="card-text">{{ news.content|truncatewords:15 }}</p>
+                  <a
+                    href="{% url 'news_detail' news.id %}"
+                    class="btn btn-sm btn-outline-primary"
+                    >Read More</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <p>No side news available.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="container">
     <div class="row">
-      <!-- Standings Table (Left) -->
-      <div class="col-lg-3 col-md-12">
+      <!-- Standings Table -->
+      <div class="col-lg-9 col-md-12">
         <h4 class="text-center text-dark">Standings</h4>
-        <table class="table table-striped text-center">
+        <table class="table table-striped text-center standings-table">
           <thead>
             <tr>
               <th>#</th>
@@ -81,11 +135,9 @@
             <tr>
               <td>{{ team.pos }}</td>
               <td>{{ team.name }}</td>
-              <td>{{ team.played }}</td>
+              <td>{{ team.matches_played }}</td>
               <td>{{ team.goals_for }}</td>
-              <!-- Added GF -->
               <td>{{ team.goals_against }}</td>
-              <!-- Added GA -->
               <td>{{ team.goal_difference }}</td>
               <td>{{ team.points }}</td>
             </tr>
@@ -98,68 +150,40 @@
         </table>
       </div>
 
-      <!-- News Section (Middle) -->
-      <div class="col-lg-6 col-md-12">
-        <h4 class="text-center text-dark">Latest News</h4>
-        <div class="card news-card mb-3">
-          <img src="assets/kabete.jpg" class="card-img-top" alt="News" />
-          <div class="card-body news-card-body">
-            <h5 class="card-title">
-              Kabate Legends to face newly promoted Kijabe Hosp
-            </h5>
-            <p class="card-text">
-              Don't miss the thrilling encounter between Kabete Legends and
-              Kijabe Hospital this weekend!
-            </p>
-          </div>
-        </div>
-        <div class="card news-card">
-          <img src="assets/fixture.jpg" class="card-img-top" alt="News" />
-          <div class="card-body news-card-body">
-            <h5 class="card-title">
-              "GAS Legends and Rooftop Ready to Ignite the Field in Upcoming
-              Clash"
-            </h5>
-            <p class="card-text">
-              Spotlight? One thing’s for sure—this match is bound to keep
-              spectators on the edge of their seats!
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fixtures (Right) -->
+      <!-- Fixtures & Results -->
       <div class="col-lg-3 col-md-12">
         <h4 class="text-center text-dark">Upcoming Fixtures</h4>
         <ul class="list-group">
+          {% if grouped_fixtures %} {% for match_date, fixtures in
+          grouped_fixtures.items %}
+          <li class="list-group-item text-center bg-light font-weight-bold">
+            {{ match_date|date:"F j, Y" }}
+          </li>
           {% for fixture in fixtures %}
           <li class="list-group-item fixture-item">
-            {{ fixture.home_team.name }} vs {{ fixture.away_team.name }} - {{
-            fixture.match_date|date:"D, d M Y" }}
+            {{ fixture.home_team.name }} vs {{ fixture.away_team.name }}
           </li>
-          {% empty %}
+          {% endfor %} {% else %}
           <li class="list-group-item text-center">No upcoming fixtures</li>
-          {% endfor %}
+          {% endif %}
         </ul>
-      </div>
 
-      <!-- Recent Results -->
-      <div class="col-lg-3 col-md-12">
-        <h4 class="text-center text-dark">Recent Results</h4>
+        <h4 class="text-center text-dark mt-4">Recent Results</h4>
         <ul class="list-group">
           {% for match in recent_matches %}
           <li class="list-group-item list-group-item-info">
             {{ match.home_team.name }} {{ match.home_score }} - {{
-            match.away_score }} {{ match.away_team.name }} ({{
-            match.match_date|date:"D g:i A" }})
+            match.away_score }} {{ match.away_team.name }}
+            <span class="d-block text-muted"
+              >{{ match.match_date|date:"F j, Y" }}</span
+            >
           </li>
           {% empty %}
-          <li class="list-group-item">No results available.</li>
+          <li class="list-group-item text-center">No results available.</li>
           {% endfor %}
         </ul>
       </div>
     </div>
   </div>
 </body>
-
 {% endblock content %}

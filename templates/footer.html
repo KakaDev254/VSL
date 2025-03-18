@@ -1,0 +1,130 @@
+{% load static %}
+<style>
+  footer {
+    margin-top: 2.5rem;
+  }
+  .company-logo {
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+  }
+  .company-logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  .col-6.col-sm-4.col-md-3.col-lg-1 img {
+    width: 50px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure proper spacing */
+    margin: auto; /* Center the logos */
+  }
+</style>
+<footer>
+  <div class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <!-- League Info -->
+        <div class="col-md-4 text-center text-md-start">
+          <h5 class="fw-bold">VSL Football League</h5>
+          <p class="small">All Out. All Game.All Season.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-4 text-center">
+          <h5 class="fw-bold">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a href="{% url 'home' %}" class="text-light text-decoration-none"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'league_tables' %}"
+                class="text-light text-decoration-none"
+                >Standings</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'fixtures' %}"
+                class="text-light text-decoration-none"
+                >Fixtures</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'results' %}"
+                class="text-light text-decoration-none"
+                >Results</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'teams' %}"
+                class="text-light text-decoration-none"
+                >Teams</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'news' %}" class="text-light text-decoration-none"
+                >News</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social Media -->
+        <div class="col-md-4 text-center text-md-end">
+          <h5 class="fw-bold">Follow Us</h5>
+          <a href="#" class="text-light me-2"
+            ><i class="fab fa-facebook fa-lg"></i
+          ></a>
+          <a href="#" class="text-light me-2"
+            ><i class="fab fa-twitter fa-lg"></i
+          ></a>
+          <a href="#" class="text-light me-2"
+            ><i class="fab fa-instagram fa-lg"></i
+          ></a>
+          <a href="#" class="text-light"
+            ><i class="fab fa-youtube fa-lg"></i
+          ></a>
+        </div>
+      </div>
+
+      <div class="container mt-4">
+        <div class="row">
+          <h6>Powered By</h6>
+          <hr class="bg-light" />
+          <div class="col-md-3 col-sm-6">
+            <div class="company-logo">
+              <img src="{%static 'images/santi.jpg'%}" alt="Santi" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          {% for team in teams %}
+          <div class="col-6 col-sm-4 col-md-3 col-lg-1">
+            {% if team.logo %}
+            <img
+              src="{{ team.logo.url }}"
+              alt="{{ team.name }} Logo"
+              class="img-fluid"
+            />
+            {% else %}
+            <p>No logo available</p>
+            <!-- Placeholder if no logo exists -->
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <hr />
+      <p class="text-center small mt-3">
+        &copy; 2025 VSL Football League. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

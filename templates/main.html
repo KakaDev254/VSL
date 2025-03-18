@@ -31,7 +31,10 @@
     <title>{% block title %}VSL{% endblock title %}</title>
   </head>
   <body>
-    {% block content %} {%endblock content %}
+    {% include 'navbar.html' %} 
+{% block content %} 
+{% endblock content %} 
+{% include 'footer.html' %}
 
     <!-- Static JavaScript -->
     <script src="{% static 'base/script.js' %}"></script>

@@ -7,7 +7,7 @@ body {
 
 /* Navbar */
 .navbar {
-  background-color: #4a006d !important; /* Red */
+  background-color: #2c2544 !important; /* Red */
 }
 .navbar-brand {
   font-weight: bold;
@@ -31,57 +31,128 @@ body {
   color: black;
   font-weight: bold;
 }
-.dropdown-menu .dropdown-item:hover {
-  background-color: #ff4545 !important; /* Green */
-  color: white;
+
+/* top fixtures */
+.top_fixtures-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  padding: 10px;
+  background-color: #05040d;
+  /* Dark background */
 }
 
-/* Standings Table */
-.table {
-  background-color: white;
-  border-radius: 5px;
+.fixture-card {
+  display: flex;
+  align-items: center;
+  background-color: #05040d;
+  padding: 10px 15px;
+  border-radius: 10px;
+  min-width: 150px;
+}
+
+.top_team-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.vs {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 8px;
+}
+/* Main News Section */
+.main-news {
+  border: none;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   overflow: hidden;
 }
-.table th {
-  background-color: #ff3131 !important; /* Yellow-Orange */
-  color: white;
-  text-transform: uppercase;
-}
-.table tbody tr:hover {
-  background-color: #5cb338 !important; /* Green */
-  color: white;
-  transition: 0.3s ease-in-out;
+
+.main-news-img {
+  width: 100%;
+  height: 50vh; /* Set to 50% of viewport height */
+  object-fit: cover; /* Ensures image fills space without distortion */
+  border-radius: 10px 10px 0 0;
 }
 
-/* News Section */
-.news-card {
+/* Side News Section */
+.side-news-card {
   border: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
 }
-.news-card img {
-  height: 200px;
+
+.side-news-img {
+  width: 100%;
+  height: 120px; /* Consistent size for side news images */
   object-fit: cover;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-radius: 8px 0 0 8px;
 }
-.news-card-body {
-  background-color: #0d6924 !important; /* Light Yellow */
-  color: black;
-  padding: 15px;
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .main-news-img {
+    height: 40vh; /* Adjust height for smaller screens */
+  }
+  .side-news-img {
+    height: 100px; /* Adjust for mobile */
+  }
 }
-.news-card-body h5 {
-  font-size: 1.2rem;
+
+/* Standings Table */
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.standings-table th {
+  background-color: #f5e908;
+  color: white;
+}
+
+.standings-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* Fixtures & Results Styling */
+.list-group-item {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.list-group-item-info {
+  background-color: #e9ecef;
+  border-left: 5px solid #120938;
   font-weight: bold;
 }
-.news-card-body p {
-  font-size: 0.95rem;
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .col-lg-9 {
+    width: 100%;
+  }
+  .col-lg-3 {
+    width: 100%;
+    margin-top: 20px;
+  }
 }
 
 /* Fixtures List */
 .list-group .fixture-item {
-  background-color: #ffff00 !important; /* Yellow-Orange */
-  color: black !important;
+  background-color: rgb(224, 219, 229) !important; /* Yellow-Orange */
+  color: rgb(26, 24, 24) !important;
   font-weight: bold;
   padding: 12px;
   border-radius: 5px;
@@ -89,7 +160,7 @@ body {
   transition: background 0.3s ease-in-out;
 }
 .list-group .fixture-item:hover {
-  background-color: #5cb338 !important; /* Green */
+  background-color: #da594a !important; /* Green */
   color: white !important;
 }
 
@@ -108,4 +179,77 @@ body {
     font-size: 0.9rem;
     padding: 10px;
   }
+}
+/* main table styling */
+.main_table-container {
+  margin: 20px 0;
+}
+.table thead {
+  background-color: #660066;
+  color: white;
+}
+.club-name,
+.player-name {
+  text-align: left;
+}
+/* fixture-page styling */
+.fixture-list {
+  border-radius: 8px;
+  background: #f8f9fa;
+  padding: 10px;
+}
+.fixture-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.team {
+  display: flex;
+  align-items: center;
+}
+.team-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.team-name {
+  font-weight: bold;
+}
+.time-badge {
+  background: #800080;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+/* teams-page styling */
+.team-card {
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  transition: 0.3s;
+  position: relative;
+}
+.team-card:hover {
+  transform: scale(1.05);
+}
+.team-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+.arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: #333;
+}
+.footer {
+  background-color: #333;
+  padding: 20px 0;
+  text-align: center;
+  color: #fff;
 }
