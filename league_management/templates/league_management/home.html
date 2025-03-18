@@ -120,7 +120,7 @@
           <li class="list-group-item fixture-item">
             {{ fixture.home_team.name }} vs {{ fixture.away_team.name }}
           </li>
-          {% endfor %} {% else %}
+          {% endfor %} {% endfor %} {% else %}
           <li class="list-group-item text-center">No upcoming fixtures</li>
           {% endif %}
         </ul>
