@@ -70,14 +70,14 @@
 
 <div class="container my-5">
   <div class="row">
-    <!-- Standings Table (Left) -->
+    <!-- League Standings -->
     <div class="col-md-5">
       <div class="table-container">
         <h5 class="section-title">League Standings</h5>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>#</th>
+              <th>Pos</th>
               <th>Club</th>
               <th>MP</th>
               <th>GD</th>
@@ -88,7 +88,7 @@
             {% for team in standings %}
             <tr>
               <td>{{ forloop.counter }}</td>
-              <td>{{ team.club_name }}</td>
+              <td>{{ team.name }}</td>
               <td>{{ team.matches_played }}</td>
               <td>{{ team.goal_difference }}</td>
               <td><strong>{{ team.points }}</strong></td>
@@ -104,7 +104,7 @@
       </div>
     </div>
 
-    <!-- Upcoming Fixtures & Recent Results (Right) -->
+    <!-- Upcoming Fixtures -->
     <div class="col-md-7">
       <div class="table-container">
         <h5 class="section-title">Upcoming Fixtures</h5>
@@ -112,8 +112,24 @@
         <p><strong>Matchday at Stima Club</strong></p>
         <ul class="list-group">
           {% for fixture in upcoming_fixtures %}
-          <li class="list-group-item d-flex justify-content-between">
-            <span>{{ fixture.home_team }} vs {{ fixture.away_team }}</span>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div class="d-flex align-items-center">
+              <img
+                src="{{ fixture.home_team.logo.url }}"
+                alt="{{ fixture.home_team }}"
+                class="team-logo"
+              />
+              <span class="mx-2">{{ fixture.home_team }}</span>
+              <strong>vs</strong>
+              <img
+                src="{{ fixture.away_team.logo.url }}"
+                alt="{{ fixture.away_team }}"
+                class="team-logo"
+              />
+              <span class="mx-2">{{ fixture.away_team }}</span>
+            </div>
             <span class="badge bg-info"
               >{{ fixture.match_date|date:"M d, H:i" }}</span
             >
@@ -125,6 +141,7 @@
         {% endif %}
       </div>
 
+      <!-- Recent Results -->
       {% comment %}
       <div class="table-container mt-4">
         <h5 class="section-title">Recent Results</h5>
@@ -132,10 +149,21 @@
         <ul class="list-group">
           {% for match in recent_matches %}
           <li class="list-group-item d-flex justify-content-between">
-            <span
-              >{{ match.home_team }} {{ match.home_score|default:"-" }} - {{
-              match.away_score|default:"-" }} {{ match.away_team }}</span
-            >
+            <span>
+              <img
+                src="{{ match.home_team.logo.url }}"
+                alt="{{ match.home_team }}"
+                class="team-logo"
+              />
+              {{ match.home_team }} {{ match.home_score|default:"-" }} - {{
+              match.away_score|default:"-" }}
+              <img
+                src="{{ match.away_team.logo.url }}"
+                alt="{{ match.away_team }}"
+                class="team-logo"
+              />
+              {{ match.away_team }}
+            </span>
             <span class="badge bg-success"
               >{{ match.match_date|date:"M d" }}</span
             >

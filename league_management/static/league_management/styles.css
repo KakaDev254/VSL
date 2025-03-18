@@ -106,10 +106,63 @@ body {
 }
 
 /* Standings Table */
+
 .table-container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  color: #f6dc43;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.list-group {
+  padding: 0;
+}
+
+.list-group-item {
+  border: 1px solid #ff2df1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease-in-out;
+}
+
+.list-group-item:hover {
+  background-color: #ff2df1;
+  transform: scale(1.02);
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f6dc43;
+  margin: 0 10px;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.badge {
+  background-color: #f6dc43 !important;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 7px 12px;
+  border-radius: 15px;
 }
 
 .section-title {
