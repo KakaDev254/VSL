@@ -68,75 +68,85 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container my-5">
   <div class="row">
-    <!-- Standings Table -->
-    <div class="col-lg-9 col-md-12">
-      <h4 class="text-center text-dark">Standings</h4>
-      <table class="table table-striped text-center standings-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Team</th>
-            <th>MP</th>
-            <th>GF</th>
-            <th>GA</th>
-            <th>GD</th>
-            <th>Pts</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for team in standings %}
-          <tr>
-            <td>{{ team.pos }}</td>
-            <td>{{ team.name }}</td>
-            <td>{{ team.matches_played }}</td>
-            <td>{{ team.goals_for }}</td>
-            <td>{{ team.goals_against }}</td>
-            <td>{{ team.goal_difference }}</td>
-            <td>{{ team.points }}</td>
-          </tr>
-          {% empty %}
-          <tr>
-            <td colspan="7">No standings available</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <!-- Standings Table (Left) -->
+    <div class="col-md-5">
+      <div class="table-container">
+        <h5 class="section-title">League Standings</h5>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Club</th>
+              <th>MP</th>
+              <th>GD</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for team in standings %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ team.club_name }}</td>
+              <td>{{ team.matches_played }}</td>
+              <td>{{ team.goal_difference }}</td>
+              <td><strong>{{ team.points }}</strong></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="view-more">
+          <a href="{% url 'league_tables' %}" class="btn btn-primary btn-sm"
+            >View More Details</a
+          >
+        </div>
+      </div>
     </div>
 
-    <!-- Fixtures & Results -->
-    <div class="col-lg-3 col-md-12">
-      <h4 class="text-center text-dark">Upcoming Fixtures</h4>
-      <ul class="list-group">
-        {% if grouped_fixtures %} {% for match_date, fixtures in
-        grouped_fixtures.items %}
-        <li class="list-group-item text-center bg-light font-weight-bold">
-          {{ match_date|date:"F j, Y" }}
-        </li>
-        {% for fixture in fixtures %}
-        <li class="list-group-item fixture-item">
-          {{ fixture.home_team.name }} vs {{ fixture.away_team.name }}
-        </li>
-        {% endfor %} {% else %}
-        <li class="list-group-item text-center">No upcoming fixtures</li>
+    <!-- Upcoming Fixtures & Recent Results (Right) -->
+    <div class="col-md-7">
+      <div class="table-container">
+        <h5 class="section-title">Upcoming Fixtures</h5>
+        {% if upcoming_fixtures %}
+        <p><strong>Matchday at Stima Club</strong></p>
+        <ul class="list-group">
+          {% for fixture in upcoming_fixtures %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>{{ fixture.home_team }} vs {{ fixture.away_team }}</span>
+            <span class="badge bg-info"
+              >{{ fixture.match_date|date:"M d, H:i" }}</span
+            >
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No upcoming fixtures</p>
         {% endif %}
-      </ul>
+      </div>
 
-      <h4 class="text-center text-dark mt-4">Recent Results</h4>
-      <ul class="list-group">
-        {% for match in recent_matches %}
-        <li class="list-group-item list-group-item-info">
-          {{ match.home_team.name }} {{ match.home_score }} - {{
-          match.away_score }} {{ match.away_team.name }}
-          <span class="d-block text-muted"
-            >{{ match.match_date|date:"F j, Y" }}</span
-          >
-        </li>
-        {% empty %}
-        <li class="list-group-item text-center">No results available.</li>
-        {% endfor %}
-      </ul>
+      {% comment %}
+      <div class="table-container mt-4">
+        <h5 class="section-title">Recent Results</h5>
+        {% if recent_matches %}
+        <ul class="list-group">
+          {% for match in recent_matches %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span
+              >{{ match.home_team }} {{ match.home_score|default:"-" }} - {{
+              match.away_score|default:"-" }} {{ match.away_team }}</span
+            >
+            <span class="badge bg-success"
+              >{{ match.match_date|date:"M d" }}</span
+            >
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No recent matches</p>
+        {% endif %}
+      </div>
+      {% endcomment %}
     </div>
   </div>
 </div>

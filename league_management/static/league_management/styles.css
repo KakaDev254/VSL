@@ -7,7 +7,7 @@ body {
 
 /* Navbar */
 .navbar {
-  background-color: #2c2544 !important; /* Red */
+  background-color: #170552 !important; /* Red */
 }
 .navbar-brand {
   font-weight: bold;
@@ -106,24 +106,63 @@ body {
 }
 
 /* Standings Table */
-.standings-table {
-  width: 100%;
-  border-collapse: collapse;
+.table-container {
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.standings-table th,
-.standings-table td {
-  padding: 10px;
+.section-title {
+  color: rgb(225, 25, 11);
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.table {
+  color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.table th {
+  background: #3a0474;
+  color: #dbee4d;
   text-align: center;
 }
 
-.standings-table th {
-  background-color: #f5e908;
-  color: white;
+.table td {
+  text-align: center;
 }
 
-.standings-table tbody tr:nth-child(even) {
-  background-color: #f8f9fa;
+.view-more {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.view-more .btn {
+  background: #f6dc43;
+  color: #410445;
+  font-weight: bold;
+}
+
+.list-group-item {
+  background: #070748;
+  color: #fff;
+  border: 1px solid #f6dc43;
+}
+
+.badge.bg-info {
+  background-color: #f6dc43;
+  color: #410445;
+  font-weight: bold;
+}
+
+.badge.bg-success {
+  background-color: #ff2df1;
+  color: #410445;
+  font-weight: bold;
 }
 
 /* Fixtures & Results Styling */

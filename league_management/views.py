@@ -65,6 +65,7 @@ def home(request):
     }
 
     context = {
+        
         'recent_matches': recent_matches,
         'standings': standings,
         'grouped_fixtures': grouped_fixtures,
