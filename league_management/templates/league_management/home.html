@@ -1,49 +1,6 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <body>
   <!-- Main Content -->
-  <div class="top_fixtures-container">
-    {% if upcoming_fixtures %} {% for fixture in upcoming_fixtures %}
-    <div class="fixture-card">
-      <div class="top_team">
-        {% if fixture.home_team.logo %}
-        <img
-          src="{{ fixture.home_team.logo.url }}"
-          alt="{{ fixture.home_team.name }}"
-          class="top_team-logo"
-        />
-        {% else %}
-        <img
-          src="{% static 'images/default-logo.png' %}"
-          alt="No logo"
-          class="top_team-logo"
-        />
-        {% endif %}
-      </div>
-
-      <div class="vs">VS</div>
-
-      <div class="top_team">
-        {% if fixture.away_team.logo %}
-        <img
-          src="{{ fixture.away_team.logo.url }}"
-          alt="{{ fixture.away_team.name }}"
-          class="top_team-logo"
-        />
-        {% else %}
-        <img
-          src="{% static 'images/default-logo.png' %}"
-          alt="No logo"
-          class="top_team-logo"
-        />
-        {% endif %}
-      </div>
-    </div>
-    {% endfor %} {% else %}
-    <div class="fixture-card">
-      <span class="no-fixture">No upcoming fixtures</span>
-    </div>
-    {% endif %}
-  </div>
 
   <div class="container mt-4">
     <div class="row">
