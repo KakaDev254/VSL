@@ -110,10 +110,7 @@ body {
   }
 
   .side-news-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover; /* Ensures image maintains aspect ratio */
-  }
+   display: none;
 }
 
 /* Standings Table */
